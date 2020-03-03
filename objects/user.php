@@ -105,12 +105,11 @@ class User{
     // check if given email exist in the database
     function emailExists(){
         
-        var_dump($this->conn);
      
         // query to check if email exists
         $query = "SELECT userID, first_name, last_name, password
                 FROM " . $this->table_name . "
-                WHERE email = ?";
+                WHERE email_address = ?";
                 
         // prepare the query
         $stmt = $this->conn->prepare( $query );
@@ -127,12 +126,15 @@ class User{
      
         // get number of rows
         $num = $stmt->rowCount();
+        
      
         // if email exists, assign values to object properties for easy access and use for php sessions
         if($num>0){
      
             // get record details / values
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+            var_dump($row);
      
             // assign values to object properties
             $this->id = $row['id'];

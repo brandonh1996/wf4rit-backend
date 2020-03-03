@@ -19,14 +19,19 @@ $db = $database->getConnection();
 $user = new User($db);
  
 // check email existence here// get posted data
-$data = json_decode(file_get_contents("php://input"));
+//$data = file_get_contents("php://input");
 
-//var_dump($data);
+$email = $_GET['email'];
+$password = hash('sha256', $salt.$_GET['password']);
 
-echo $data;
+echo($email);
+echo("\n");
+echo($password);
+echo("\n");
+
 
 // set product property values
-$user->email = $data->email;
+$user->email = $email;
 $email_exists = $user->emailExists();
  
 // generate json web token
@@ -36,10 +41,14 @@ include_once 'libs/php-jwt-master/src/ExpiredException.php';
 include_once 'libs/php-jwt-master/src/SignatureInvalidException.php';
 include_once 'libs/php-jwt-master/src/JWT.php';
 use \Firebase\JWT\JWT;
- 
+
+$salt = "ImCreatingThisSoItsALotHarderToGuess256";
+
+var_dump($email_exists);
+
 // check if email exists and if password is correct
-if($email_exists && password_verify($data->password, $user->password)){
- 
+if($email_exists && (0 == (strcmp($password, $user->password)))){
+    echo "poop";
     $token = array(
        "iss" => $iss, //issuer -->identifies the principle that issued JWT
        "aud" => $aud, //audience --> intended recepient of JWT 
