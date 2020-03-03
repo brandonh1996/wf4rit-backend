@@ -7,7 +7,7 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
  
 // database connection will be here
-include_once('../../.htaccess');
+include_once('config/database.php');
 $DataBase = new Database();
 $db = $DataBase->getConnection();
 

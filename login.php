@@ -20,7 +20,11 @@ $user = new User($db);
  
 // check email existence here// get posted data
 $data = json_decode(file_get_contents("php://input"));
- 
+
+//var_dump($data);
+
+echo $data;
+
 // set product property values
 $user->email = $data->email;
 $email_exists = $user->emailExists();

@@ -7,8 +7,5 @@ date_default_timezone_set('America/New_York');
  
 // variables used for jwt
 $key = "example_key";
-$iss = "http://example.org";
-$aud = "http://example.com";
-$iat = 1356999524;
-$nbf = 1357000000;
-?>
+$iss = "https://www.dev01.wf4rit.me/";
+$aud = "https://www.dev01.wf4rit.me/";

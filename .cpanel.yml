@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/wf4rit/public_html/dev01/api
+    - /bin/cp -R * $DEPLOYPATH
