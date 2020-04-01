@@ -47,6 +47,8 @@ global $user;
 
 $salt = "ImCreatingThisSoItsALotHarderToGuess256";
 
+echo $password;
+
 // check if email exists and if password is correct
 if($email_exists && password_verify($password, $user->password)){
     $token = array(
