@@ -23,6 +23,10 @@ $data = json_decode(file_get_contents("php://input"));
 
 //$email = $_POST['email'];
 echo $_GET['password'];
+echo "
+
+";
+var_dump($data);
 $data->password = hash('sha256', $_GET['password']);
 
 
