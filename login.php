@@ -22,7 +22,7 @@ $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
 
 //$email = $_POST['email'];
-$password = hash('sha256', $_GET['password']);
+$password = $_GET['password'];
 
 
 // set product property values
@@ -48,8 +48,6 @@ global $user;
 $salt = "ImCreatingThisSoItsALotHarderToGuess256";
 
 echo $password;
-$results = password_verify(strval($password), $user->password);
-echo $results;
 
 // check if email exists and if password is correct
 if($email_exists && password_verify(strval($password), $user->password)){
