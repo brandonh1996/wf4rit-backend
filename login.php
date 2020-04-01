@@ -27,6 +27,7 @@ $data->password = hash('sha256', $_GET['password']);
 
 // set product property values
 $user->email = $data->email;
+
 $email_exists = $user->emailExists();
  
 // generate json web token
@@ -48,10 +49,10 @@ $salt = "ImCreatingThisSoItsALotHarderToGuess256";
 
 echo $data->password;
 echo "<br />";
-echo $user->password;
 
 // check if email exists and if password is correct
 if($email_exists && password_verify($data->password, $user->password)){
+    echo $user->password;
     $token = array(
        "iss" => $iss, //issuer -->identifies the principle that issued JWT
        "aud" => $aud, //audience --> intended recepient of JWT 
