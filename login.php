@@ -82,9 +82,11 @@ if($email_exists && ( 0 == strcmp(strval($password), $user->password))){
 else{
  
     // set response code
-    echo http_response_code(401);
+    http_response_code(401);
  
     // tell the user login failed
-    echo json_encode(array("message" => "Login failed."));
+    echo json_encode(array("message" => "Login failed.",
+                            "response_code" => http_response_code()   
+                        ));
 }
 ?>
