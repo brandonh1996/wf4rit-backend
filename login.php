@@ -22,6 +22,7 @@ $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
 
 //$email = $_POST['email'];
+echo $_GET['password'];
 $data->password = hash('sha256', $_GET['password']);
 
 
