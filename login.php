@@ -22,7 +22,7 @@ $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
 
 //$email = $_POST['email'];
-$password = hash('sha256', $_POST['password']);
+$data->password = hash('sha256', $_POST['password']);
 
 
 // set product property values
