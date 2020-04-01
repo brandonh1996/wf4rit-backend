@@ -21,13 +21,8 @@ $user = new User($db);
 // check email existence here// get posted data
 //$data = file_get_contents("php://input");
 
-$email = $_GET['email'];
-$password = hash('sha256', $salt.$_GET['password']);
-
-echo($email);
-echo("\n");
-echo($password);
-echo("\n");
+$email = $_POST['email'];
+$password = hash('sha256', $_POST['password']);
 
 
 // set product property values
@@ -40,7 +35,10 @@ include_once 'libs/php-jwt-master/src/BeforeValidException.php';
 include_once 'libs/php-jwt-master/src/ExpiredException.php';
 include_once 'libs/php-jwt-master/src/SignatureInvalidException.php';
 include_once 'libs/php-jwt-master/src/JWT.php';
+
 use \Firebase\JWT\JWT;
+
+use global; 
 
 $salt = "ImCreatingThisSoItsALotHarderToGuess256";
 
