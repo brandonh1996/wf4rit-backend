@@ -42,11 +42,8 @@ use global;
 
 $salt = "ImCreatingThisSoItsALotHarderToGuess256";
 
-var_dump($email_exists);
-
 // check if email exists and if password is correct
 if($email_exists && (0 == (strcmp($password, $user->password)))){
-    echo "poop";
     $token = array(
        "iss" => $iss, //issuer -->identifies the principle that issued JWT
        "aud" => $aud, //audience --> intended recepient of JWT 
