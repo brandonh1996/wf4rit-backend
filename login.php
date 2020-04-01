@@ -38,7 +38,11 @@ include_once 'libs/php-jwt-master/src/JWT.php';
 
 use \Firebase\JWT\JWT;
 
-use global; 
+global $iss;
+global $aud;
+global $iat;
+global $nbf;
+global $user;
 
 $salt = "ImCreatingThisSoItsALotHarderToGuess256";
 
