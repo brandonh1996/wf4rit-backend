@@ -49,10 +49,12 @@ $salt = "ImCreatingThisSoItsALotHarderToGuess256";
 
 echo $data->password;
 echo "<br />";
+$email_exists;
+echo $user->password;
+
 
 // check if email exists and if password is correct
 if($email_exists && password_verify($data->password, $user->password)){
-    echo $user->password;
     $token = array(
        "iss" => $iss, //issuer -->identifies the principle that issued JWT
        "aud" => $aud, //audience --> intended recepient of JWT 
