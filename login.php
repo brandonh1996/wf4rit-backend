@@ -47,6 +47,7 @@ global $user;
 $salt = "ImCreatingThisSoItsALotHarderToGuess256";
 
 echo $data->password;
+echo;
 echo $user->password;
 
 // check if email exists and if password is correct
