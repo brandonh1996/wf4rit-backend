@@ -19,14 +19,14 @@ $db = $database->getConnection();
 $user = new User($db);
  
 // check email existence here// get posted data
-//$data = file_get_contents("php://input");
+$data = json_decode(file_get_contents("php://input"));
 
-$email = $_POST['email'];
+//$email = $_POST['email'];
 $password = hash('sha256', $_POST['password']);
 
 
 // set product property values
-$user->email = $email;
+$user->email = $data->email;
 $email_exists = $user->emailExists();
  
 // generate json web token
@@ -46,8 +46,11 @@ global $user;
 
 $salt = "ImCreatingThisSoItsALotHarderToGuess256";
 
+echo $password;
+echo $user->password;
+
 // check if email exists and if password is correct
-if($email_exists && (0 == (strcmp($password, $user->password)))){
+if($email_exists && password_verify($data->password, $user->password)){
     $token = array(
        "iss" => $iss, //issuer -->identifies the principle that issued JWT
        "aud" => $aud, //audience --> intended recepient of JWT 
