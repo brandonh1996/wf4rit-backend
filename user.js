@@ -1,5 +1,9 @@
 const crypt = require('bcrypt');
+const express = require('express');
 const jwt = require('jsonwebtoken');
+const app = express();
+const secret = 'workFlowTeamMetallicasSecretShhhhhh';
+
 
 module.exports = (app, db, secret) => {
   app.get('/user/:email', (req, res) => {
@@ -10,6 +14,10 @@ module.exports = (app, db, secret) => {
         email: result.email
       })
     );
+  });
+
+  app.get('/dashboard', jwtVerifier({secret: secret}), (req, res) => {
+    res.send('Congratulations, you made it to the Dashboard');
   });
 
   app.post('/user/login', (req, res) => {
@@ -29,6 +37,12 @@ module.exports = (app, db, secret) => {
       });
     });
   });
+
+  app.use((err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+      res.status(500).send(err.message);
+    }
+  })
 
   app.post('/user', (req, res) => {
     crypt.hash(req.body.password, 10, (err, hash) => {
