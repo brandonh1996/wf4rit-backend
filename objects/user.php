@@ -134,8 +134,6 @@ class User{
             // get record details / values
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
      
-            var_dump($row);
-     
             // assign values to object properties
             $this->id = $row['id'];
             $this->firstname = $row['firstname'];

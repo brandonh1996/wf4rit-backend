@@ -47,8 +47,6 @@ global $user;
 
 $salt = "ImCreatingThisSoItsALotHarderToGuess256";
 
-echo $password;
-
 // check if email exists and if password is correct
 if($email_exists && ( 0 == strcmp(strval($password), $user->password))){
     $token = array(
@@ -68,13 +66,13 @@ if($email_exists && ( 0 == strcmp(strval($password), $user->password))){
     http_response_code(200);
  
     // generate jwt
-    $jwt = JWT::encode($token, $key);
-    echo json_encode(
-            array(
-                "message" => "Successful login.",
-                "jwt" => $jwt
-            )
-        );
+    // $jwt = JWT::encode($token, $key);
+    // echo json_encode(
+    //         array(
+    //             "message" => "Successful login.",
+    //             "jwt" => $jwt
+    //         )
+    //     );
  
 }
  
