@@ -2,6 +2,7 @@ const crypt = require('bcrypt');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const app = express();
+const jwtVerifier = require('express-jwt');
 const secret = 'workFlowTeamMetallicasSecretShhhhhh';
 
 
