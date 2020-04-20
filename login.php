@@ -59,13 +59,13 @@ if($email_exists && ( 0 == strcmp(strval($password), $user->password))){
     http_response_code(200);
  
     // generate jwt
-    // $jwt = JWT::encode($token, $key);
-    // echo json_encode(
-    //         array(
-    //             "message" => "Successful login.",
-    //             "jwt" => $jwt
-    //         )
-    //     );
+    $jwt = JWT::encode($token, $key);
+    json_encode(
+        array(
+        "message" => "Successful login.",
+        "jwt" => $jwt
+        )
+    );
  
 }
  
@@ -76,8 +76,8 @@ else{
     http_response_code(401);
  
     // tell the user login failed
-    echo json_encode(array("message" => "Login failed.",
-                            "response_code" => http_response_code()   
-                        ));
+    json_encode(array("message" => "Login failed.",
+                        "response_code" => http_response_code()   
+                    ));
 }
 ?>
