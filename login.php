@@ -62,8 +62,8 @@ if($email_exists && ( 0 == strcmp(strval($password), $user->password))){
     $jwt = JWT::encode($token, $key);
     json_encode(
         array(
-        "message" => "Successful login.",
-        "jwt" => $jwt
+            "message" => "Successful login.",
+            "jwt" => $jwt
         )
     );
  
