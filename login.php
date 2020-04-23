@@ -1,12 +1,5 @@
-<?php
-// required headers
-header("Access-Control-Allow-Origin: http://localhost/rest-api-authentication-example/");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
-header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
- 
-// database connection will be here
+<?php 
+// database connection will be here.
 // files needed to connect to database
 include_once 'config/database.php';
 include_once 'objects/user.php';
@@ -19,14 +12,15 @@ $db = $database->getConnection();
 $user = new User($db);
  
 // check email existence here// get posted data
-$data = json_decode(file_get_contents("php://input"));
+// $data = json_decode(file_get_contents("php://input"));
 
-//var_dump($data);
+//$email = $_POST['email'];
+$password = hash('sha256', $_POST['password']);
 
-echo $data;
 
 // set product property values
-$user->email = $data->email;
+$user->email = $_POST['email'];
+
 $email_exists = $user->emailExists();
  
 // generate json web token
@@ -35,11 +29,19 @@ include_once 'libs/php-jwt-master/src/BeforeValidException.php';
 include_once 'libs/php-jwt-master/src/ExpiredException.php';
 include_once 'libs/php-jwt-master/src/SignatureInvalidException.php';
 include_once 'libs/php-jwt-master/src/JWT.php';
+
 use \Firebase\JWT\JWT;
- 
+
+global $iss;
+global $aud;
+global $iat;
+global $nbf;
+global $user;
+
+$salt = "ImCreatingThisSoItsALotHarderToGuess256";
+
 // check if email exists and if password is correct
-if($email_exists && password_verify($data->password, $user->password)){
- 
+if($email_exists && ( 0 == strcmp(strval($password), $user->password))){
     $token = array(
        "iss" => $iss, //issuer -->identifies the principle that issued JWT
        "aud" => $aud, //audience --> intended recepient of JWT 
@@ -58,12 +60,12 @@ if($email_exists && password_verify($data->password, $user->password)){
  
     // generate jwt
     $jwt = JWT::encode($token, $key);
-    echo json_encode(
-            array(
-                "message" => "Successful login.",
-                "jwt" => $jwt
-            )
-        );
+    json_encode(
+        array(
+            "message" => "Successful login.",
+            "jwt" => $jwt
+        )
+    );
  
 }
  
@@ -74,6 +76,8 @@ else{
     http_response_code(401);
  
     // tell the user login failed
-    echo json_encode(array("message" => "Login failed."));
+    json_encode(array("message" => "Login failed.",
+                        "response_code" => http_response_code()   
+                    ));
 }
 ?>
